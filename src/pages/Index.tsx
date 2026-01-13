@@ -2,12 +2,13 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
+import Activities from '@/components/Activities';
 import Tours from '@/components/Tours';
 import Festivals from '@/components/Festivals';
 import Contact from '@/components/Contact';
-import Newsletter from '@/components/Newsletter';
+
 import Footer from '@/components/Footer';
-import FestivalModal from '@/components/FestivalModal';
+import Testimonials from '@/components/Testimonials';
 
 const Index = () => {
   return (
@@ -17,13 +18,14 @@ const Index = () => {
         <main>
           <Hero />
           <About />
+          <Activities />
           <Tours />
-          <Festivals />
           <Contact />
-          <Newsletter />
+          <Testimonials />
+
         </main>
         <Footer />
-        <FestivalModal />
+        {/* <FestivalModal /> */}
       </div>
     </LanguageProvider>
   );

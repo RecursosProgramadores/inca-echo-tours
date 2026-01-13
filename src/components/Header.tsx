@@ -4,7 +4,8 @@ import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { t } from '@/lib/translations';
 import { Button } from '@/components/ui/button';
-import logo from '@/assets/infinity-logo.png';
+import logoInfinity from '@/assets/logoinfinity.jpg';
+import wstpIcon from '@/assets/wstp.svg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,6 @@ const Header = () => {
     { key: 'nav.home', href: '#home' },
     { key: 'nav.about', href: '#about' },
     { key: 'nav.tours', href: '#tours' },
-    { key: 'nav.festivals', href: '#festivals' },
     { key: 'nav.contact', href: '#contact' },
   ];
 
@@ -25,6 +25,10 @@ const Header = () => {
     }
     setIsMenuOpen(false);
   };
+
+  const whatsappLink = `https://wa.me/51905793612?text=${language === 'es' 
+    ? 'Hola, quiero planear mi viaje a Cusco con Infinity Experience Tours' 
+    : 'Hello, I want to plan my trip to Cusco with Infinity Experience Tours'}`;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-violet-deep/95 backdrop-blur-md border-b border-gold/20">
@@ -41,15 +45,7 @@ const Header = () => {
               scrollToSection('#home');
             }}
           >
-            <img src={logo} alt="Infinity Experience" className="h-10 md:h-12 w-auto" />
-            <div className="hidden sm:block">
-              <span className="text-gradient-gold font-display text-lg md:text-xl font-bold tracking-wide">
-                INFINITY
-              </span>
-              <span className="block text-cream text-xs tracking-[0.2em] -mt-1">
-                EXPERIENCE TOURS
-              </span>
-            </div>
+            <img src={logoInfinity} alt="Infinity Experience Tours" className="h-[3.5rem] md:h-[4.5rem] w-auto rounded-lg" />
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -85,12 +81,13 @@ const Header = () => {
             </Button>
 
             <a
-              href="https://wa.me/51999999999"
+              href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:block"
             >
-              <Button className="bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold text-sm px-6">
+              <Button className="bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold text-sm px-6 flex items-center gap-2">
+                <img src={wstpIcon} alt="WhatsApp" className="w-5 h-5" />
                 {t('hero.cta', language)}
               </Button>
             </a>
@@ -131,12 +128,13 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="https://wa.me/51999999999"
+                href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4"
               >
-                <Button className="w-full bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold">
+                <Button className="w-full bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold flex items-center justify-center gap-2">
+                  <img src={wstpIcon} alt="WhatsApp" className="w-5 h-5" />
                   {t('hero.cta', language)}
                 </Button>
               </a>

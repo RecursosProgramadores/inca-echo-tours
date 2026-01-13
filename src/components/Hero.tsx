@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { ChevronDown, MessageCircle, MapPin } from 'lucide-react';
+import { ChevronDown, MapPin } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { t } from '@/lib/translations';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-machu-picchu.jpg';
+import wstpIcon from '@/assets/wstp.svg';
 
 const Hero = () => {
   const { language } = useLanguage();
@@ -11,6 +12,10 @@ const Hero = () => {
   const scrollToTours = () => {
     document.querySelector('#tours')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const whatsappLink = `https://wa.me/51905793612?text=${language === 'es' 
+    ? 'Hola, quiero comenzar mi aventura en Cusco con Infinity Experience Tours' 
+    : 'Hello, I want to start my adventure in Cusco with Infinity Experience Tours'}`;
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -30,10 +35,10 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center pt-20">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
         >
           {/* Badge */}
           <motion.div
@@ -82,15 +87,15 @@ const Hero = () => {
             transition={{ delay: 0.6 }}
           >
             <a
-              href="https://wa.me/51999999999"
+              href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
             >
               <Button
                 size="lg"
-                className="bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold text-lg px-8 py-6 gap-2 w-full sm:w-auto"
+                className="bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold text-lg px-8 py-6 gap-2 w-full sm:w-auto flex items-center"
               >
-                <MessageCircle className="h-5 w-5" />
+                <img src={wstpIcon} alt="WhatsApp" className="h-6 w-6" />
                 {t('hero.cta', language)}
               </Button>
             </a>

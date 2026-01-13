@@ -8,6 +8,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import wstpIcon from '@/assets/wstp.svg';
+
+const WstpIcon = ({ className }: { className?: string }) => (
+  <img src={wstpIcon} alt="WhatsApp" className={className} />
+);
 
 const Contact = () => {
   const { language } = useLanguage();
@@ -16,18 +21,25 @@ const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+
+    const whatsappMessage = `Hola, mi nombre es ${name}. Email: ${email}. Mensaje: ${message}`;
+    const whatsappUrl = `https://wa.me/51905793612?text=${encodeURIComponent(whatsappMessage)}`;
+
+    window.open(whatsappUrl, '_blank');
     
     toast({
-      title: language === 'es' ? '¡Mensaje enviado!' : 'Message sent!',
+      title: language === 'es' ? '¡Redirigiendo a WhatsApp!' : 'Redirecting to WhatsApp!',
       description: language === 'es' 
-        ? 'Nos pondremos en contacto contigo pronto.'
-        : 'We will contact you soon.',
+        ? 'Continúa tu conversación en WhatsApp.'
+        : 'Continue your conversation on WhatsApp.',
     });
     
     setIsSubmitting(false);
@@ -35,13 +47,7 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    {
-      icon: MessageCircle,
-      titleEs: 'WhatsApp',
-      titleEn: 'WhatsApp',
-      value: '+51 999 999 999',
-      href: 'https://wa.me/51999999999',
-    },
+
     {
       icon: Mail,
       titleEs: 'Correo Electrónico',
@@ -66,7 +72,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-violet-deep" ref={ref}>
+    <section id="contact" className="py-16 md:py-24 bg-violet-deep" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -116,7 +122,7 @@ const Contact = () => {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/51999999999"
+              href={`https://wa.me/51905793612?text=${language === 'es' ? 'Hola, quiero contactar con Infinity Experience Tours' : 'Hello, I want to contact Infinity Experience Tours'}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -124,24 +130,27 @@ const Contact = () => {
                 size="lg"
                 className="w-full bg-[#25D366] hover:bg-[#20BA5C] text-white font-semibold gap-3 py-6"
               >
-                <MessageCircle className="h-6 w-6" />
+                <img src={wstpIcon} alt="WhatsApp" className="h-6 w-6" />
                 {t('contact.whatsapp', language)}
               </Button>
             </a>
 
-            {/* Logistics Info */}
-            <div className="mt-8 p-6 bg-violet-black/50 border border-gold/30 rounded-xl">
-              <h4 className="font-display text-lg font-semibold text-gold mb-4">
-                {language === 'es' ? 'Servicios Incluidos' : 'Included Services'}
-              </h4>
-              <ul className="space-y-2 text-cream/80 text-sm">
-                <li>• {language === 'es' ? 'Casa de cambios de divisa' : 'Currency exchange'}</li>
-                <li>• {language === 'es' ? 'Descuentos en tiendas de souvenirs' : 'Souvenir shop discounts'}</li>
-                <li>• {language === 'es' ? 'Alojamiento acorde al gusto' : 'Accommodation to your taste'}</li>
-                <li>• {language === 'es' ? 'Transporte 100% garantizado' : '100% guaranteed transport'}</li>
-                <li>• {language === 'es' ? 'Guiado profesional' : 'Professional guide'}</li>
-              </ul>
+            {/* Google Map */}
+            <div className="mt-8 rounded-xl overflow-hidden border border-gold/30 shadow-lg h-64">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6207.251478144672!2d-71.9785356!3d-13.516086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916dd5d82659d81b%3A0x280d5658e0a14981!2sCusco!5e0!3m2!1sen!2spe!4v1650000000000!5m2!1sen!2spe" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa de Cusco"
+                className="filter grayscale hover:grayscale-0 transition-all duration-500"
+              ></iframe>
             </div>
+
+
           </motion.div>
 
           {/* Contact Form */}
@@ -208,6 +217,20 @@ const Contact = () => {
                 </Button>
               </div>
             </form>
+
+            {/* Logistics Info (Moved to Right Column) */}
+            <div className="mt-6 p-5 bg-violet-black/50 border border-gold/30 rounded-xl">
+              <h4 className="font-display text-base font-semibold text-gold mb-3">
+                {language === 'es' ? 'Servicios Incluidos' : 'Included Services'}
+              </h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-cream/80 text-xs">
+                <li>• {language === 'es' ? 'Cambio de divisa' : 'Currency exchange'}</li>
+                <li>• {language === 'es' ? 'Descuentos souvenirs' : 'Souvenir discounts'}</li>
+                <li>• {language === 'es' ? 'Alojamiento a gusto' : 'Custom accommodation'}</li>
+                <li>• {language === 'es' ? 'Transporte garantizado' : 'Guaranteed transport'}</li>
+                <li>• {language === 'es' ? 'Guiado profesional' : 'Professional guide'}</li>
+              </ul>
+            </div>
           </motion.div>
         </div>
       </div>

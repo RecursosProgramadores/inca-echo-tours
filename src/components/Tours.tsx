@@ -1,21 +1,29 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Clock, Mountain, Star, Check, MessageCircle } from 'lucide-react';
+import { Clock, Mountain, Star, Check, Eye } from 'lucide-react';
+import wstpIcon from '@/assets/wstp.svg';
 import { useLanguage } from '@/context/LanguageContext';
 import { t } from '@/lib/translations';
 import { mainAttractions, otherTours, tourTypes, Tour } from '@/lib/tours';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import TourModal from '@/components/TourModal';
 
-const TourCard = ({ tour, language }: { tour: Tour; language: 'es' | 'en' }) => {
+// Moved TourCard distinct logic here if needed, but since it relies on props, it's fine.
+// Actually, I should remove it from inside Tours and paste it outside.
+// BUT I need to pass 'language' and 'onOpenModal'.
+// The previous file view shows it uses 't' from translations.
+// So I will just delete it from INSIDE and ensuring it is defined OUTSIDE.
+
+const TourCard = ({ tour, language, onOpenModal }: { tour: Tour; language: 'es' | 'en'; onOpenModal: (tour: Tour) => void }) => {
   return (
     <motion.div
-      className="group bg-card border-gradient-gold rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
+      className="group bg-card border-gradient-gold rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full"
       whileHover={{ y: -5 }}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden flex-shrink-0">
         <img
           src={tour.image}
           alt={language === 'es' ? tour.nameEs : tour.nameEn}
@@ -46,39 +54,50 @@ const TourCard = ({ tour, language }: { tour: Tour; language: 'es' | 'en' }) => 
 
         {/* Title overlay */}
         <div className="absolute bottom-4 left-4 right-4">
-          <h3 className="font-display text-xl font-bold text-cream">
+          <h3 className="font-display text-xl font-bold text-cream leading-tight">
             {language === 'es' ? tour.nameEs : tour.nameEn}
           </h3>
         </div>
       </div>
 
-      <div className="p-5">
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+      <div className="p-5 flex flex-col flex-grow">
+        <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-grow">
           {language === 'es' ? tour.descriptionEs : tour.descriptionEn}
         </p>
 
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Clock className="h-4 w-4 text-gold" />
+        <div className="flex items-center gap-4 mb-4 mt-auto border-t border-gold/10 pt-4">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Clock className="h-3.5 w-3.5 text-gold" />
             <span>{tour.duration} {t('tours.days', language)}</span>
           </div>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Mountain className="h-4 w-4 text-gold" />
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Mountain className="h-3.5 w-3.5 text-gold" />
             <span>{tour.altitude} m.s.n.m.</span>
           </div>
         </div>
 
-        <a
-          href="https://wa.me/51999999999"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-        >
-          <Button className="w-full bg-gradient-gold text-violet-deep hover:opacity-90 font-semibold gap-2">
-            <MessageCircle className="h-4 w-4" />
-            {t('contact.whatsapp', language)}
-          </Button>
-        </a>
+        <div className="grid grid-cols-2 gap-3">
+           <Button 
+             variant="outline" 
+             className="w-full border-gold/50 text-violet-deep hover:bg-gold/10 hover:text-violet-deep font-semibold text-xs gap-1.5"
+             onClick={() => onOpenModal(tour)}
+           >
+             <Eye className="h-3.5 w-3.5" />
+             {language === 'es' ? 'Ver Detalles' : 'View Details'}
+           </Button>
+
+            <a
+              href={`https://wa.me/51905793612?text=Hola, estoy interesado en el tour: ${language === 'es' ? tour.nameEs : tour.nameEn}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full"
+            >
+              <Button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold gap-1.5 text-xs">
+                <img src={wstpIcon} alt="WhatsApp" className="h-3.5 w-3.5" />
+                WhatsApp
+              </Button>
+            </a>
+        </div>
       </div>
     </motion.div>
   );
@@ -89,6 +108,13 @@ const Tours = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeTab, setActiveTab] = useState('main');
+  const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = (tour: Tour) => {
+    setSelectedTour(tour);
+    setIsModalOpen(true);
+  };
 
   const qualityLevels = [
     {
@@ -175,7 +201,7 @@ const Tours = () => {
             <Badge
               key={type.id}
               variant="outline"
-              className="border-gold/50 text-gold px-4 py-2"
+              className="border-gold/50 text-gold px-4 py-2 hover:bg-gold/10 transition-colors"
             >
               {language === 'es' ? type.nameEs : type.nameEn}
             </Badge>
@@ -222,7 +248,12 @@ const Tours = () => {
               transition={{ duration: 0.4 }}
             >
               {mainAttractions.map((tour) => (
-                <TourCard key={tour.id} tour={tour} language={language} />
+                <TourCard 
+                    key={tour.id} 
+                    tour={tour} 
+                    language={language} 
+                    onOpenModal={handleOpenModal}
+                />
               ))}
             </motion.div>
           </TabsContent>
@@ -235,12 +266,24 @@ const Tours = () => {
               transition={{ duration: 0.4 }}
             >
               {otherTours.map((tour) => (
-                <TourCard key={tour.id} tour={tour} language={language} />
+                <TourCard 
+                    key={tour.id} 
+                    tour={tour} 
+                    language={language} 
+                    onOpenModal={handleOpenModal}
+                />
               ))}
             </motion.div>
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Tour Modal */}
+      <TourModal 
+        tour={selectedTour} 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   );
 };
