@@ -296,7 +296,8 @@ export const otherTours: Tour[] = [
     descriptionEn: 'Adventure to the western lowland jungle, impressive landscapes and unique biodiversity.',
     duration: '7',
     altitude: '450-1050',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800',
+    image: valleMp1,
+    gallery: [valleMp1, valleMp2, camina1],
     objectives: commonObjectives,
     characteristics: commonCharacteristics,
     logistics: commonLogistics
@@ -309,7 +310,8 @@ export const otherTours: Tour[] = [
     descriptionEn: 'Expedition to the eastern Amazon jungle, extreme biodiversity. For wild nature lovers.',
     duration: '7',
     altitude: '150-300',
-    image: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=800',
+    image: valleMp2,
+    gallery: [valleMp2, camina2, camina3],
     objectives: commonObjectives,
     characteristics: commonCharacteristics,
     logistics: commonLogistics
@@ -322,7 +324,8 @@ export const otherTours: Tour[] = [
     descriptionEn: 'Route to the eastern border with Brazil, exuberant nature and adventure in the jungle.',
     duration: '7',
     altitude: '180-3100',
-    image: 'https://images.unsplash.com/photo-1559666126-84f389727b9a?w=800',
+    image: camina3,
+    gallery: [camina3, camina1, valleMp1],
     objectives: commonObjectives,
     characteristics: commonCharacteristics,
     logistics: commonLogistics
@@ -335,7 +338,8 @@ export const otherTours: Tour[] = [
     descriptionEn: 'Southern pre-Hispanic maritime port, history and Peruvian coast. A journey through time and geography.',
     duration: '5',
     altitude: '10-3300',
-    image: 'https://images.unsplash.com/photo-1568464992589-c42fc7f55f87?w=800',
+    image: cuscoPlaza,
+    gallery: [cuscoPlaza, cuscoArqueologia, cuscoCalle],
     objectives: commonObjectives,
     characteristics: commonCharacteristics,
     logistics: commonLogistics
@@ -348,7 +352,8 @@ export const otherTours: Tour[] = [
     descriptionEn: 'The highest navigable lake in the world, living ancestral culture. Floating islands and unique traditions.',
     duration: '4',
     altitude: '3820',
-    image: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800',
+    image: laguna1,
+    gallery: [laguna1, laguna2, laguna3],
     objectives: commonObjectives,
     characteristics: commonCharacteristics,
     logistics: commonLogistics
@@ -361,7 +366,8 @@ export const otherTours: Tour[] = [
     descriptionEn: 'The best beaches in Peru, sun, sea and coastal gastronomy. Total relaxation in the north.',
     duration: '7',
     altitude: '0-3300',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800',
+    image: laguna2,
+    gallery: [laguna2, laguna3, sevenLag1],
     objectives: commonObjectives,
     characteristics: commonCharacteristics,
     logistics: commonLogistics
