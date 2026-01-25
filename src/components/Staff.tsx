@@ -162,7 +162,7 @@ const Staff = () => {
               transition={{ duration: 0.6, delay: idx * 0.2 }}
             >
               {/* Image section - left side */}
-              <div className="relative w-full md:w-80 lg:w-96 flex-shrink-0 h-72 md:h-auto md:min-h-[400px] overflow-hidden">
+              <div className="relative w-full md:w-80 lg:w-96 flex-shrink-0 h-96 md:h-auto md:min-h-[400px] overflow-hidden">
                 <img
                   src={member.image}
                   alt={member.name}
