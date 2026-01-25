@@ -189,18 +189,18 @@ const Staff = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {member.sections.map((section, sIdx) => (
                     <div key={sIdx}>
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
-                          <section.icon className="h-4 w-4 text-gold" />
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+                          <section.icon className="h-5 w-5 text-gold" />
                         </div>
-                        <h4 className="font-display font-semibold text-violet-deep text-sm">
+                        <h4 className="font-display font-semibold text-violet-deep text-base lg:text-lg">
                           {language === 'es' ? section.titleEs : section.titleEn}
                         </h4>
                       </div>
-                      <ul className="space-y-2 pl-10 lg:pl-0">
+                      <ul className="space-y-3 pl-10 lg:pl-0">
                         {(language === 'es' ? section.itemsEs : section.itemsEn).map((item, iIdx) => (
-                          <li key={iIdx} className="text-muted-foreground text-sm flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+                          <li key={iIdx} className="text-muted-foreground text-base flex items-start gap-2">
+                            <span className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0" />
                             <span>{item}</span>
                           </li>
                         ))}
