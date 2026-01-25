@@ -152,25 +152,25 @@ const Staff = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-8">
           {teamMembers.map((member, idx) => (
             <motion.div
               key={member.id}
-              className="bg-card border-gradient-gold rounded-2xl overflow-hidden shadow-lg"
+              className="w-full bg-card border-gradient-gold rounded-2xl overflow-hidden shadow-lg flex flex-col md:flex-row"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: idx * 0.2 }}
             >
-              {/* Header with image */}
-              <div className="relative h-72 overflow-hidden">
+              {/* Image section - left side */}
+              <div className="relative w-full md:w-80 lg:w-96 flex-shrink-0 h-72 md:h-auto md:min-h-[400px] overflow-hidden">
                 <img
                   src={member.image}
                   alt={member.name}
                   className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-violet-deep via-violet-deep/50 to-transparent" />
-                <div className="absolute bottom-4 left-6 right-6">
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-violet-deep via-violet-deep/50 to-transparent" />
+                <div className="absolute bottom-4 left-6 right-6 md:bottom-6">
                   <h3 className="font-display text-2xl font-bold text-cream mb-1">
                     {member.name}
                   </h3>
@@ -184,28 +184,30 @@ const Staff = () => {
                 </div>
               </div>
 
-              {/* Content sections */}
-              <div className="p-6 space-y-6">
-                {member.sections.map((section, sIdx) => (
-                  <div key={sIdx}>
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
-                        <section.icon className="h-4 w-4 text-gold" />
+              {/* Content sections - right side */}
+              <div className="flex-1 p-6 md:p-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {member.sections.map((section, sIdx) => (
+                    <div key={sIdx}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+                          <section.icon className="h-4 w-4 text-gold" />
+                        </div>
+                        <h4 className="font-display font-semibold text-violet-deep text-sm">
+                          {language === 'es' ? section.titleEs : section.titleEn}
+                        </h4>
                       </div>
-                      <h4 className="font-display font-semibold text-violet-deep">
-                        {language === 'es' ? section.titleEs : section.titleEn}
-                      </h4>
+                      <ul className="space-y-2 pl-10 lg:pl-0">
+                        {(language === 'es' ? section.itemsEs : section.itemsEn).map((item, iIdx) => (
+                          <li key={iIdx} className="text-muted-foreground text-sm flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="space-y-2 pl-10">
-                      {(language === 'es' ? section.itemsEs : section.itemsEn).map((item, iIdx) => (
-                        <li key={iIdx} className="text-muted-foreground text-sm flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
