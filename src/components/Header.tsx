@@ -4,7 +4,7 @@ import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { t } from '@/lib/translations';
 import { Button } from '@/components/ui/button';
-import logoInfinity from '@/assets/logoinfinity.jpg';
+import logoExperience from '@/assets/logo-experience.png';
 import wstpIcon from '@/assets/wstp.svg';
 
 const Header = () => {
@@ -45,7 +45,7 @@ const Header = () => {
               scrollToSection('#home');
             }}
           >
-            <img src={logoInfinity} alt="Infinity Experience Tours" className="h-[3.5rem] md:h-[4.5rem] w-auto rounded-lg" />
+            <img src={logoExperience} alt="Infinity Experience A&E Tours" className="h-[4rem] md:h-[5rem] w-auto" />
           </motion.a>
 
           {/* Desktop Navigation */}
