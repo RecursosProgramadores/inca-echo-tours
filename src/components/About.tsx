@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import aboutImg from '../assets/hero-machu-picchu.jpg';
-import img2006 from '../assets/history_2006.png';
-import img2012 from '../assets/history_2012.png';
+import img2006 from '../assets/arqueologia.jpeg';
+import img2012 from '../assets/estudioe.jpeg';
 import img2013 from '../assets/history_2013.png';
-import img2018 from '../assets/history_2018.png';
-import img2025 from '../assets/history_2025.png';
+import img2018 from '../assets/sevicio.jpeg';
+import img2025 from '../assets/experiencia.jpeg';
 
 const timelineData = [
   {

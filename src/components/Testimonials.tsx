@@ -5,36 +5,20 @@ import { t } from '@/lib/translations';
 
 const testimonials = [
   {
-    name: "Peter Davidson",
-    role: "Viajero",
-    location: "USA",
-    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=200&h=200",
-    contentEs: "Fue una experiencia increíble. La conexión con la cultura y la historia fue profunda y muy bien explicada.",
-    contentEn: "It was an amazing experience. The connection with the culture and history was deep and very well explained."
+    name: "Raúl Loayza Rojas",
+    role: "Arqueólogo & Guía Oficial de Turismo",
+    location: "Cusco, Perú",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200&h=200",
+    contentEs: "Profesional destacado en arqueología, especialista en gestión del patrimonio cultural, análisis de materiales arqueológicos, investigación y conservación del patrimonio, y Guía oficial de turismo muy apasionado, combina la historia y la dinámica del servicio turístico brindando calidad y búsqueda de nuevas experiencias a personas y grupos.\n\nRealizó trabajos de investigación arqueológica y turismo en Machupicchu por 12 años realizando numerosos estudios y publicaciones.\n\nGestor cultural, promueve eventos académicos, charlas, exposiciones temporales, talleres didácticos y pedagógicos, difunde la identidad y preservación de la cultura andina.",
+    contentEn: "Distinguished archaeology professional, specialist in cultural heritage management, archaeological materials analysis, research, and heritage conservation. As a highly passionate official tour guide, he combines history and tourism dynamics, providing quality and a search for new experiences for individuals and groups.\n\nHe has carried out archaeological research and tourism work in Machupicchu for 12 years, producing numerous studies and publications.\n\nCultural manager, promotes academic events, talks, temporary exhibitions, educational and pedagogical workshops, and disseminates the identity and preservation of Andean culture."
   },
   {
-    name: "Emily Davidson",
-    role: "Aventurera",
-    location: "UK",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200&h=200",
-    contentEs: "La organización y el profesionalismo del equipo hicieron de nuestro viaje algo inolvidable. ¡Altamente recomendado!",
-    contentEn: "The organization and professionalism of the team made our trip unforgettable. Highly recommended!"
-  },
-  {
-    name: "Luis Aragon",
-    role: "Turista",
-    location: "España",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200",
-    contentEs: "Descubrir Cusco de la mano de expertos arqueólogos cambió totalmente mi perspectiva. Un servicio de primera.",
-    contentEn: "Discovering Cusco with expert archaeologists totally changed my perspective. Top-notch service."
-  },
-  {
-    name: "Santiago Bendezu",
-    role: "Explorador",
-    location: "Chile",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200",
-    contentEs: "Desde la logística hasta el guiado, todo fue perfecto. Se nota la pasión y el conocimiento que tienen.",
-    contentEn: "From logistics to guiding, everything was perfect. You can feel the passion and knowledge they have."
+    name: "Raysa Kristel Guillen Zuñiga",
+    role: "Profesional en Salud & Ejecutiva en Ventas",
+    location: "Cusco, Perú",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200",
+    contentEs: "Profesional renombrada en salud, aporta desde la especialidad de la salud oral el cuidado de adultos jóvenes y niños, nutrición orgánica y bienestar del cuerpo y la mente con la búsqueda del contacto con la naturaleza y nuevos ecosistemas.\n\nEjecutiva en ventas de larga trayectoria, utilizando nuevas estrategias de compartir e informar a los visitantes del mundo y el manejo de situaciones e ideales, lista a solucionar toda ocurrencia en el campo turístico.\n\nDiseñadora de modas, participando en eventos locales y nacionales con destacadas marcas de ropa, colaboradora y creadora de diseños de ropa a partir del estilo prehispánico. Amante de la naturaleza y petlover, la fascinación por descubrir espacios naturales de la región le llevó a descubrir lugares únicos para rejuvenecer el espíritu y la energía vital del cuerpo.",
+    contentEn: "Renowned health professional, contributes from the specialty of oral health to the care of young adults and children, organic nutrition, and well-being of body and mind through contact with nature and new ecosystems.\n\nSales executive with a long career, using new strategies to share and inform visitors from around the world and managing situations and ideals, ready to solve any occurrence in the tourism field.\n\nFashion designer, participating in local and national events with prominent clothing brands, collaborator and creator of clothing designs based on the pre-Hispanic style. Nature lover and pet lover, her fascination with discovering natural spaces in the region led her to discover unique places to rejuvenate the spirit and vital energy of the body."
   }
 ];
 
@@ -45,8 +29,8 @@ const Testimonials = () => {
     <section id="testimonials" className="py-20 bg-violet-deep relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-          <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-gold rounded-full blur-[120px]"></div>
-          <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-violet-500 rounded-full blur-[100px]"></div>
+        <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-gold rounded-full blur-[120px]"></div>
+        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-violet-500 rounded-full blur-[100px]"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -56,8 +40,8 @@ const Testimonials = () => {
           </h2>
           <div className="w-24 h-1 bg-gold mx-auto rounded-full mb-6"></div>
           <p className="text-cream/80 text-lg max-w-2xl mx-auto">
-            {language === 'es' 
-              ? 'Historias reales de personas que vivieron la experiencia Infinity.' 
+            {language === 'es'
+              ? 'Historias reales de personas que vivieron la experiencia Infinity.'
               : 'Real stories from people who lived the Infinity experience.'}
           </p>
         </div>
@@ -73,17 +57,17 @@ const Testimonials = () => {
               className="bg-violet-black/40 border border-gold/20 p-6 rounded-2xl md:p-8 hover:bg-violet-black/60 transition-colors group"
             >
               <div className="flex justify-center mb-6 relative">
-                 <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gold/50 p-1 group-hover:border-gold transition-colors">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-full" />
-                 </div>
-                 <div className="absolute -bottom-2 bg-gold text-violet-deep p-1.5 rounded-full shadow-lg">
-                    <Quote className="w-4 h-4 fill-current" />
-                 </div>
+                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gold/50 p-1 group-hover:border-gold transition-colors">
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-full" />
+                </div>
+                <div className="absolute -bottom-2 bg-gold text-violet-deep p-1.5 rounded-full shadow-lg">
+                  <Quote className="w-4 h-4 fill-current" />
+                </div>
               </div>
 
               <div className="flex justify-center gap-0.5 mb-4 text-gold">
                 {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
+                  <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
 
