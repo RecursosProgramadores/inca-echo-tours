@@ -118,34 +118,31 @@ const Tours = () => {
 
   const qualityLevels = [
     {
-      level: 'A',
-      nameEs: 'Premium',
-      nameEn: 'Premium',
-      descEs: 'Máximo confort, alojamiento de lujo, transporte privado, guía exclusivo, todas las comidas gourmet incluidas.',
-      descEn: 'Maximum comfort, luxury accommodation, private transport, exclusive guide, all gourmet meals included.',
-      color: 'bg-gold',
+      level: 'C',
+      nameEs: 'Clásico',
+      nameEn: 'Classic',
+      includesEs: ['Transporte', 'Alimentación', 'Entradas', 'Guía'],
+      includesEn: ['Transport', 'Meals', 'Tickets', 'Guide'],
+      color: 'bg-cream',
     },
     {
-      level: 'B',
-      nameEs: 'Estándar',
-      nameEn: 'Standard',
-      descEs: 'Excelente relación calidad-precio, alojamiento confortable, transporte compartido, guía profesional.',
-      descEn: 'Excellent value for money, comfortable accommodation, shared transport, professional guide.',
+      level: 'P',
+      nameEs: 'Premium',
+      nameEn: 'Premium',
+      includesEs: ['Transporte', 'Alojamiento', 'Alimentación', 'Entradas', 'Guía', 'Sesión de fotos'],
+      includesEn: ['Transport', 'Accommodation', 'Meals', 'Tickets', 'Guide', 'Photo session'],
       color: 'bg-silver',
     },
     {
-      level: 'C',
-      nameEs: 'Económico',
-      nameEn: 'Budget',
-      descEs: 'Opción accesible sin sacrificar calidad, alojamiento básico, transporte público, guía grupal.',
-      descEn: 'Affordable option without sacrificing quality, basic accommodation, public transport, group guide.',
-      color: 'bg-cream',
+      level: 'V',
+      nameEs: 'VIP',
+      nameEn: 'VIP',
+      includesEs: ['Transporte', 'Alojamiento', 'Alimentación', 'Entradas', 'Guía', 'Sesión de fotos', 'Spa y relajación', 'Outfit estilo prehispánico', 'Souvenirs'],
+      includesEn: ['Transport', 'Accommodation', 'Meals', 'Tickets', 'Guide', 'Photo session', 'Spa & relaxation', 'Prehispanic style outfit', 'Souvenirs'],
+      color: 'bg-gold',
     },
   ];
 
-  const includes = language === 'es'
-    ? ['Transporte', 'Alimentación', 'Alojamiento', 'Boletos', 'Guiado']
-    : ['Transport', 'Meals', 'Accommodation', 'Tickets', 'Guide'];
 
   return (
     <section id="tours" className="py-20 md:py-32 bg-violet-deep" ref={ref}>
@@ -172,20 +169,28 @@ const Tours = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {qualityLevels.map((level, index) => (
+          {qualityLevels.map((level) => (
             <div
               key={level.level}
-              className="bg-violet-black/50 border border-gold/30 rounded-xl p-6 text-center"
+              className="bg-violet-black/50 border border-gold/30 rounded-xl p-6"
             >
-              <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${level.color} mb-4`}>
-                <span className="font-display font-bold text-xl text-violet-deep">{level.level}</span>
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full ${level.color} flex-shrink-0`}>
+                  <span className="font-display font-bold text-lg text-violet-deep">{level.level}</span>
+                </div>
+                <h3 className="font-display text-xl font-semibold text-gold">
+                  {language === 'es' ? level.nameEs : level.nameEn}
+                </h3>
               </div>
-              <h3 className="font-display text-xl font-semibold text-gold mb-2">
-                {language === 'es' ? level.nameEs : level.nameEn}
-              </h3>
-              <p className="text-cream/70 text-sm">
-                {language === 'es' ? level.descEs : level.descEn}
-              </p>
+              <p className="text-cream/60 text-xs mb-3">{language === 'es' ? 'Incluye:' : 'Includes:'}</p>
+              <ul className="space-y-2">
+                {(language === 'es' ? level.includesEs : level.includesEn).map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-cream/80 text-sm">
+                    <Check className="h-3.5 w-3.5 text-gold flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </motion.div>
@@ -208,20 +213,6 @@ const Tours = () => {
           ))}
         </motion.div>
 
-        {/* Includes */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-6 mb-12 text-cream/80"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.35 }}
-        >
-          {includes.map((item, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-gold" />
-              <span className="text-sm">{item}</span>
-            </div>
-          ))}
-        </motion.div>
 
         {/* Tours Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
